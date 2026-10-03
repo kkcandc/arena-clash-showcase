@@ -23,6 +23,7 @@ declare global {
       time: () => number
       mode: () => string
       seek: (t: number) => void
+      tick: (dt: number) => { t: number; mode: string }
     }
   }
 }
