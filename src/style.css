@@ -1,0 +1,240 @@
+:root {
+  color-scheme: dark;
+  --ink: #f4efe6;
+  --ember: #ff6a2a;
+  --muted: rgba(244, 239, 230, 0.72);
+  --letter: 7vh;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  background: #07060c;
+  overflow: hidden;
+  font-family: "Barlow Condensed", "Arial Narrow", Impact, sans-serif;
+}
+
+#view {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+#vignette {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 42%, rgba(0, 0, 0, 0.62) 100%);
+}
+
+#flash {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: #fff3e4;
+  opacity: 0;
+  mix-blend-mode: screen;
+}
+
+.letter {
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: var(--letter);
+  background: #050308;
+  pointer-events: none;
+  z-index: 3;
+}
+
+#letter-top {
+  top: 0;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+}
+
+#letter-bot {
+  bottom: 0;
+  box-shadow: 0 -18px 40px rgba(0, 0, 0, 0.35);
+}
+
+#title-block {
+  position: fixed;
+  z-index: 4;
+  left: 50%;
+  top: calc(var(--letter) + 4vh);
+  transform: translateX(-50%);
+  text-align: center;
+  pointer-events: none;
+  width: min(92vw, 980px);
+  opacity: 0;
+}
+
+.eyebrow {
+  margin: 0 0 0.35rem;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  font-size: clamp(12px, 1.5vw, 16px);
+  color: var(--ember);
+  font-weight: 600;
+}
+
+h1 {
+  margin: 0;
+  font-family: Cinzel, Palatino, Georgia, serif;
+  font-weight: 700;
+  font-size: clamp(42px, 7.4vw, 96px);
+  letter-spacing: 0.12em;
+  line-height: 0.95;
+  color: var(--ink);
+  text-shadow: 0 12px 40px rgba(0, 0, 0, 0.75), 0 0 24px rgba(255, 90, 30, 0.25);
+}
+
+.matchup {
+  margin: 0.85rem 0 0;
+  letter-spacing: 0.38em;
+  font-size: clamp(14px, 2vw, 22px);
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.matchup span {
+  color: var(--ember);
+  letter-spacing: 0;
+  padding: 0 0.35rem;
+}
+
+#ko {
+  position: fixed;
+  z-index: 4;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  margin: 0;
+  pointer-events: none;
+  font-family: Cinzel, Palatino, Georgia, serif;
+  font-size: clamp(84px, 16vw, 210px);
+  letter-spacing: 0.16em;
+  color: #fff6ea;
+  text-indent: 0.16em;
+  text-shadow:
+    0 0 18px rgba(255, 176, 90, 0.9),
+    0 0 70px rgba(255, 70, 0, 0.75);
+  opacity: 0;
+}
+
+#replay,
+#mute {
+  position: fixed;
+  z-index: 5;
+  border: 1px solid rgba(244, 239, 230, 0.28);
+  background: rgba(8, 6, 10, 0.55);
+  color: var(--ink);
+  backdrop-filter: blur(8px);
+  cursor: pointer;
+  font-family: inherit;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+#replay {
+  left: 50%;
+  bottom: calc(var(--letter) + 18px);
+  transform: translateX(-50%);
+  padding: 0.75rem 1.4rem;
+  font-size: 16px;
+}
+
+#replay[hidden] {
+  display: none;
+}
+
+#mute {
+  right: 18px;
+  bottom: calc(var(--letter) + 16px);
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.55rem 0.8rem;
+  font-size: 14px;
+}
+
+#mute[aria-pressed='true'] {
+  color: rgba(244, 239, 230, 0.55);
+}
+
+.mute-icon {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 2px currentColor;
+  position: relative;
+}
+
+#mute[aria-pressed='false'] .mute-icon::after {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  background: var(--ember);
+}
+
+#sound-hint {
+  position: fixed;
+  z-index: 5;
+  left: 50%;
+  bottom: calc(var(--letter) + 22px);
+  transform: translateX(-50%);
+  margin: 0;
+  padding: 0.45rem 0.9rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-size: 14px;
+  color: var(--ink);
+  background: rgba(8, 6, 10, 0.62);
+  border: 1px solid rgba(255, 106, 42, 0.7);
+  pointer-events: none;
+  animation: pulse 1.4s ease-in-out infinite;
+}
+
+#sound-hint[hidden] {
+  display: none;
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.55;
+  }
+}
+
+@media (max-width: 720px) {
+  :root {
+    --letter: 5.5vh;
+  }
+
+  h1 {
+    letter-spacing: 0.08em;
+  }
+
+  .matchup,
+  .eyebrow {
+    letter-spacing: 0.22em;
+  }
+
+  #mute .mute-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+
+  #mute {
+    padding: 0.7rem;
+  }
+}
