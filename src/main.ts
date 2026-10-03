@@ -246,9 +246,9 @@ window.addEventListener('keydown', (event) => {
 window.addEventListener('resize', resize)
 
 const clock = new THREE.Clock()
+const capture = params.has('capture')
 
-function frame(): void {
-  const dt = Math.min(clock.getDelta(), 0.05)
+function frame(dt: number): void {
   if (mode === 'play') {
     if (hitStop > 0) hitStop = Math.max(0, hitStop - dt)
     else {
@@ -306,14 +306,24 @@ function frame(): void {
   if (flash > 0) flash = Math.max(0, flash - dt * 0.8)
   syncUi()
   composer.render()
-  requestAnimationFrame(frame)
 }
 
 window.__ring = {
   time: () => cine,
   mode: () => mode,
   seek,
+  tick: (dt: number) => {
+    frame(dt)
+    return { t: cine, mode }
+  },
 }
 
 if (freezeAt !== null && Number.isFinite(freezeAt) && freezeAt <= 0) seek(0)
-requestAnimationFrame(frame)
+if (capture) frame(0)
+else {
+  const loop = (): void => {
+    frame(Math.min(clock.getDelta(), 0.05))
+    requestAnimationFrame(loop)
+  }
+  requestAnimationFrame(loop)
+}
