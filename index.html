@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>RING OF CINDERS</title>
+    <meta
+      name="description"
+      content="Ring of Cinders — an original night-coliseum combat cinematic. Kael meets Sable under the ash moon."
+    />
+    <meta property="og:title" content="RING OF CINDERS" />
+    <meta
+      property="og:description"
+      content="An original night-coliseum combat cinematic. One exchange. One knockout."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/og.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600&family=Cinzel:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <canvas id="view"></canvas>
+    <div id="vignette"></div>
+    <div id="flash"></div>
+    <div class="letter" id="letter-top"></div>
+    <div class="letter" id="letter-bot"></div>
+    <header id="title-block">
+      <p class="eyebrow">Original cinematic</p>
+      <h1>RING OF CINDERS</h1>
+      <p class="matchup">KAEL <span>×</span> SABLE</p>
+    </header>
+    <p id="ko" aria-hidden="true">K.O.</p>
+    <button id="replay" type="button" hidden>Replay</button>
+    <button id="mute" type="button" aria-pressed="false" aria-label="Mute sound">
+      <span class="mute-icon" aria-hidden="true"></span>
+      <span class="mute-label">Sound on</span>
+    </button>
+    <p id="sound-hint">Tap for sound</p>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
